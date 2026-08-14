@@ -1,12 +1,14 @@
 <!doctype html>
-<!-- deploy: logo-fix-20260814-1609 -->
+<!-- deploy: favicon-v3-20260814-1619 -->
 <html lang="vi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kho quản lý hàng</title>
-<link rel="icon" type="image/png" sizes="128x128" href="favicon.png?v=20260814-2">
-<link rel="apple-touch-icon" href="brand-logo.jpg?v=20260814-2">
+<link rel="icon" href="/maianhuy/favicon-v3.ico" sizes="any">
+<link rel="shortcut icon" href="/maianhuy/favicon-v3.ico">
+<link rel="icon" type="image/png" sizes="64x64" href="/maianhuy/favicon-v3.png">
+<link rel="apple-touch-icon" href="/maianhuy/favicon-v3.png">
 <style>
 body{font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a;padding:30px}
 #loading{max-width:680px;margin:60px auto;padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
@@ -35,14 +37,24 @@ body{font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a;padding:30px}
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
   let html=await new Response(stream).text();
 
+  // Use the same company logo in the sidebar and browser tab.
   html=html.replace(
    /<img class="brand-logo" src="[^"]+" alt="Brand logo">/,
-   '<img class="brand-logo" src="brand-logo.jpg?v=20260814-2" alt="Brand logo">'
+   '<img class="brand-logo" src="brand-logo.jpg?v=20260814-3" alt="Brand logo">'
   );
 
+  // Remove any old favicon declarations from the bundled document so the
+  // browser has only one canonical icon source.
+  html=html.replace(/<link[^>]+rel=["\'][^"\']*icon[^"\']*["\'][^>]*>/gi,'');
+  html=html.replace(/<link[^>]+rel=["\']apple-touch-icon["\'][^>]*>/gi,'');
+
+  // The loaded application replaces this loader document, so inject favicon +
+  // final brand CSS into the application document itself as well.
   const assetFix=`
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=20260814-2">
-<link rel="apple-touch-icon" href="brand-logo.jpg?v=20260814-2">
+<link rel="icon" href="/maianhuy/favicon-v3.ico" sizes="any">
+<link rel="shortcut icon" href="/maianhuy/favicon-v3.ico">
+<link rel="icon" type="image/png" sizes="64x64" href="/maianhuy/favicon-v3.png">
+<link rel="apple-touch-icon" href="/maianhuy/favicon-v3.png">
 <style id="brand-logo-final-fix">
 .brand{align-items:center!important;gap:12px!important}
 .brand-logo{
