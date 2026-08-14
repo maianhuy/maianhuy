@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kho quản lý hàng</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <style>body{font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a;padding:30px}#loading{max-width:680px;margin:60px auto;padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}</style>
 </head>
 <body>
@@ -11,12 +12,7 @@
 <script>
 (async()=>{
  try{
-  const files=[
-   'bundle2/part00.txt','bundle2/part01.txt',
-   'bundle2/part02a1.txt','bundle2/part02a2.txt','bundle2/part02b.txt','bundle2/part02c.txt','bundle2/part02d.txt',
-   'bundle2/part03a.txt','bundle2/part03b.txt','bundle2/part03c.txt','bundle2/part03d.txt',
-   'bundle2/part04.txt'
-  ];
+  const files=["bundle4/part00.txt", "bundle4/part01.txt", "bundle4/part02.txt", "bundle4/part03.txt", "bundle4/part04.txt", "bundle4/part05.txt", "bundle4/part06.txt", "bundle4/part07.txt", "bundle4/part08.txt", "bundle4/part09.txt", "bundle4/part10.txt", "bundle4/part11.txt"];
   const parts=await Promise.all(files.map(async f=>{
    const r=await fetch(f,{cache:'no-store'});
    if(!r.ok)throw new Error('Không tải được '+f);
